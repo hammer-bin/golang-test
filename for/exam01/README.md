@@ -27,6 +27,7 @@ n번째 줄에 n번째 기호는 *을 출력합니다.
 
 
 입/출력 예시
+<<<<<<< HEAD:for/exam01/README.md
 :
 공백
 :
@@ -44,3 +45,7 @@ ooo*
 oooo*
 ⋇ 입출력 형식을 잘 지켜주세요
 
+=======
+
+![image](https://user-images.githubusercontent.com/67575226/161351108-5b129aef-9b8c-445f-8972-d268d64a146b.png)
+>>>>>>> 3bdefe59b9fd11f50ecab0dd72a681fb6775f7b8:for/README.md
