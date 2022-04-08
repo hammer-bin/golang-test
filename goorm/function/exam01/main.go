@@ -33,6 +33,7 @@ func outputNums(r []int) {
 }
 
 func main() {
+	fmt.Println("yuyuyu")
 	nums := inputNums()
 	bubbleSort(nums)
 	outputNums(nums)
