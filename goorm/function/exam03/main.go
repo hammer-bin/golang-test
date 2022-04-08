@@ -8,7 +8,7 @@ type Energy func(float32, float32) float32
 
 func calMechEnergy(f Energy, a float32, b float32) (result float32) {
 	result = f(a, b)
-	return result
+	return
 }
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 	fmt.Scanln(&m, &v, &h)
 
 	kinEnergy := func(m, v float32) float32 {
-		return float32(1/2) * m * (v * v)
+		return (m * v * v) / 2
 	}
 	potEnergy := func(m, h float32) float32 {
 		return m * g * h
@@ -24,5 +24,5 @@ func main() {
 
 	ke := calMechEnergy(kinEnergy, m, v)
 	pe := calMechEnergy(potEnergy, m, h)
-	fmt.Printf("%f %f %f", ke, pe, ke+pe)
+	fmt.Printf("%v %v %v", ke, pe, ke+pe)
 }
