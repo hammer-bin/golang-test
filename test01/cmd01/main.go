@@ -4,8 +4,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os/exec"
+	"syscall"
 )
 
+func execCommandOutput(name string, arg ...string) (string, error) {
+	cmd := exec.Command(name, arg...)
+
+	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true} // 콘솔모드 프로그램실행 시 검은 콘솔창 뜨는것 제거(윈도우만)
+	output, err := cmd.CombinedOutput()
+	return string(output), err
+}
 func output1() {
 	targetDir := "C:/putty"
 	files, err := ioutil.ReadDir(targetDir)
@@ -19,7 +27,7 @@ func output1() {
 	}
 }
 
-func main() {
+func run() {
 
 	cmd := exec.Command("ls", "-a")
 	cmd.Dir = "C:/putty"
@@ -31,6 +39,14 @@ func main() {
 	} else {
 		fmt.Println(string(output))
 	}
+}
 
-	output1()
+func main() {
+	a, err := execCommandOutput("ls", "-a")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(a)
+	fmt.Println("----------------------------------------------")
+	//output1()
 }
