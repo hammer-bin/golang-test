@@ -49,7 +49,7 @@ func readEq(eq string) {
 		fmt.Println(err)
 		var numError *strconv.NumError
 		if errors.As(err, &numError) {
-			fmt.Println("NumberError", numError)
+			fmt.Println("NumberError", numError.Num, numError.Func, numError.Err)
 		}
 	}
 }
