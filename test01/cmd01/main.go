@@ -8,6 +8,7 @@ import (
 )
 
 func execCommandOutput(name string, arg ...string) (string, error) {
+	//os.Chdir("..")
 	cmd := exec.Command(name, arg...)
 
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true} // 콘솔모드 프로그램실행 시 검은 콘솔창 뜨는것 제거(윈도우만)
