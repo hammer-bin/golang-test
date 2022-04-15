@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -92,6 +93,7 @@ func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 	updateUser := new(User)
 	err := json.NewDecoder(r.Body).Decode(updateUser)
 	if err != nil {
+		log.Println("<>?", err)
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprint(w, err)
 		return

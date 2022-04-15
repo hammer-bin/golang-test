@@ -126,7 +126,7 @@ func TestUpdateUser(t *testing.T) {
 	defer ts.Close()
 
 	req, _ := http.NewRequest("PUT", ts.URL+"/users",
-		strings.NewReader(`{"id":1, "first_name":"update", "last_name":"update", "email":"updated@naver.com"`))
+		strings.NewReader(`{"id":1, "first_name":"update", "last_name":"update", "email":"updated@naver.com"}`))
 	resp, err := http.DefaultClient.Do(req)
 	assert.NoError(err)
 	assert.Equal(http.StatusOK, resp.StatusCode)
