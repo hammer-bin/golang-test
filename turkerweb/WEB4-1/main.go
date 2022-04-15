@@ -32,7 +32,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	http.HandleFunc("/uploads", uploadHandler)
-	http.Handle("/", http.FileServer(http.Dir("public")))
+	http.Handle("/", http.FileServer(http.Dir("./turkerweb/WEB4-1/public/")))
 
 	http.ListenAndServe(":3001", nil)
 }
