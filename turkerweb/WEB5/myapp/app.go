@@ -18,6 +18,14 @@ type User struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+type UpdateUser struct {
+	ID        int       `json:"id"`
+	FirstName string    `json:"first_name"`
+	LastName  string    `json:"last_name"`
+	Email     string    `json:"email"`
+	CreatedAt time.Time `json:"created_at"`
+}
+
 var userMap map[int]*User
 var lastID int
 
@@ -26,7 +34,11 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func usersHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Get UserInfo by /users/{id}")
+	if len(userMap) == 0 {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, "No Users")
+		return
+	}
 }
 
 func getUserInfoHandler(w http.ResponseWriter, r *http.Request) {
@@ -98,11 +110,25 @@ func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, err)
 		return
 	}
-	_, ok := userMap[updateUser.ID]
+	user, ok := userMap[updateUser.ID]
 	if !ok {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprint(w, "No User ID:", updateUser.ID)
+		return
 	}
+	if updateUser.FirstName != "" {
+		user.FirstName = updateUser.FirstName
+	}
+	if updateUser.LastName != "" {
+		user.LastName = updateUser.LastName
+	}
+	if updateUser.Email != "" {
+		user.Email = updateUser.Email
+	}
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	data, _ := json.Marshal(user)
+	fmt.Fprint(w, string(data))
 }
 
 // NewHandler make a new myapp handler
