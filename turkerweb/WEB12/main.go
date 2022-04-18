@@ -29,6 +29,7 @@ func getUserInfoHandler(w http.ResponseWriter, r *http.Request) {
 
 func addUserHandler(w http.ResponseWriter, r *http.Request) {
 	user := new(User)
+	//log.Print("[LOGGER1] Started")
 	err := json.NewDecoder(r.Body).Decode(user)
 	if err != nil {
 		/*w.WriteHeader(http.StatusBadRequest)
