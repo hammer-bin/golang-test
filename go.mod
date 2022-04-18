@@ -16,4 +16,5 @@ require (
 	github.com/stretchr/testify v1.7.1
 	github.com/tuckersGo/goWeb v0.0.0-20200531032145-28d77cfd0a29
 	github.com/unrolled/render v1.4.1
+	github.com/urfave/negroni v1.0.0 // indirect
 )

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gorilla/pat"
 	"github.com/unrolled/render"
+	"github.com/urfave/negroni"
 	"net/http"
 	"time"
 )
@@ -30,7 +31,7 @@ func getUserInfoHandler(w http.ResponseWriter, r *http.Request) {
 func addUserHandler(w http.ResponseWriter, r *http.Request) {
 	user := new(User)
 	//log.Print("[LOGGER1] Started")
-	err := json.NewDecoder(r.Body).Decode(user)
+	err := json.NewDecoder(r.Body).Decode(user) //user에 값을 채워준다.
 	if err != nil {
 		/*w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprint(w, err)*/
@@ -46,6 +47,7 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
+	user := User{Name: "suslmk", Email: "suslmk@naver.com"}
 	/*tmpl, err := template.New("Hello").ParseFiles("D:/workspaceGolang/golang-test/turkerweb/WEB12/templates/hello.tmpl")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -53,13 +55,15 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 		rd.Text(w, http.StatusInternalServerError, err.Error())
 		return
 	}*/
-	rd.HTML(w, http.StatusOK, "hello", "Suslmk")
+	rd.HTML(w, http.StatusOK, "body", user)
 	//tmpl.ExecuteTemplate(w, "hello.tmpl", "Suslmk")
 }
 
 func main() {
 	rd = render.New(render.Options{
+		Directory:  "D:/workspaceGolang/golang-test/turkerweb/WEB12/templates",
 		Extensions: []string{".html", ".tmpl"},
+		Layout:     "hello2",
 	})
 	mux := pat.New()
 
@@ -67,8 +71,11 @@ func main() {
 	mux.Post("/users", addUserHandler)
 	mux.Get("/hello", helloHandler)
 
+	n := negroni.Classic()
+	n.UseHandler(mux)
+
 	//mux.HandleFunc("/users", getUserInfoHandler).Methods("GET")
 	//mux.HandleFunc("/users", addUserHandler).Methods("POST")
 
-	http.ListenAndServe(":3000", mux)
+	http.ListenAndServe(":3000", n)
 }
