@@ -32,7 +32,7 @@ func (m *memoryHandler) getTodos() []*Todo {
 	return list
 }
 func (m *memoryHandler) addTodo(name string) *Todo {
-	id := len(todoMap) + 1
+	id := len(m.todoMap) + 1
 	todo := &Todo{id, name, false, time.Now()}
 	m.todoMap[id] = todo
 	return todo
@@ -62,7 +62,6 @@ var handler dbHandler
 
 func init() {
 	handler = newMemoryHandler()
-	todoMap = make(map[int]*Todo)
 }
 
 func GetTodos() []*Todo {
