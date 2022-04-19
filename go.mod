@@ -5,6 +5,7 @@ go 1.14
 require (
 	fyne.io/fyne/v2 v2.1.4
 	github.com/antage/eventsource v0.0.0-20190412115600-84b661236871 // indirect
+	github.com/aobt/sqlmapper v0.0.0-20200910061331-bc0477404178 // indirect
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gorilla/context v1.1.1 // indirect
