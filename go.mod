@@ -8,6 +8,7 @@ require (
 	github.com/aobt/sqlmapper v0.0.0-20200910061331-bc0477404178 // indirect
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/golang/glog v1.0.0 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/pat v1.0.1
