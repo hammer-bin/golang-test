@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	m := app.MakeHandler()
+	m := app.MakeHandler("./test.db")
+	defer m.Close()
 	n := negroni.Classic()
 	//n.Use(negroni.NewStatic(http.Dir("./turkerweb/WEB16/public/")))
 	n.UseHandler(m)
