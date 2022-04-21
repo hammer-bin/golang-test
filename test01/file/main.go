@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/aobt/sqlmapper"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql" //묵시적 사용
 	"log"
 	"os"
 )
