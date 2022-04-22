@@ -1,15 +1,43 @@
 package main
 
-import "fmt"
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"github.com/fatih/structs"
+	"regexp"
+)
+
+type User struct {
+	FirstName string `structs:"first_name"`
+	LastName  string `structs:"last_name"`
+}
 
 func main() {
-	var num1, num2, num3, result int
+	a := User{FirstName: `${file("google.json")}`, LastName: "Wick"}
+	s := structs.New(a)
+	m := s.Map()
 
-	fmt.Scanln(&num1, &num2, &num3)
+	jsonByte, err := json.Marshal(m) // map to JSON Format([]byte)
+	if err != nil {
+		panic(err)
+	}
+	re := regexp.MustCompile(`[\/\\]`)
+	//key := re.ReplaceAllString(string(jsonByte), "")
+	//strings.Replace(string(jsonByte), '\"', "123", -1)
 
-	result = num1*num2 + num3
+	//fmt.Println(key)
+	TfJson, _ := FormatJSONPretty(jsonByte)
+	key := re.ReplaceAllString(string(TfJson), "")
 
-	fmt.Printf("num1의 값은:%d num2의 값은:%d\n", num1, num2)
+	fmt.Println(string(key))
+}
 
-	fmt.Printf("%d x %d + %d = %d", num1, num2, num3, result)
+func FormatJSONPretty(data []byte) ([]byte, error) {
+	var out bytes.Buffer
+	err := json.Indent(&out, data, "", "    ")
+	if err == nil {
+		return out.Bytes(), err
+	}
+	return data, nil
 }
