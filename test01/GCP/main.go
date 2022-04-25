@@ -32,9 +32,35 @@ type Attribute struct {
 
 type NetInterface struct {
 	AccessConfig []AccessConfig `json:"access_config"`
+	NetworkIp    string         `json:"network_ip"`
 }
 
 type AccessConfig struct {
+	NatIp string `json:"nat_ip"`
+}
+
+type TotalInstance struct {
+	inst []*ResourceInfo
+}
+type ResourceInfo struct {
+	Name      string
+	NetworkIp string
+	NatIp     string
+}
+
+func (t *TotalInstance) addInstance(name, net_ip, nat_ip string) {
+	r := &ResourceInfo{Name: name, NetworkIp: net_ip, NatIp: nat_ip}
+	t.inst = append(t.inst, r)
+}
+
+func (t *TotalInstance) printInstance() {
+	fmt.Println("-------[Instance Information]------")
+	for _, value := range t.inst {
+		fmt.Printf("%v\n", *value)
+		fmt.Printf("%s\n", value)
+		fmt.Printf("Instance Name: %s\nNetwork IP: %s\nNAT IP: %s\n", value.Name, value.NetworkIp, value.NatIp)
+	}
+	fmt.Println("-----------------------------------")
 }
 
 func main() {
@@ -60,11 +86,26 @@ func main() {
 	// jsonFile's content into 'users' which we defined above
 	json.Unmarshal(byteValue, &gcp)
 
+	q1 := TotalInstance{}
 	// we iterate through every user within our users array and
 	// print out the user Type, their name, and their facebook url
 	// as just an example
 	for i := 0; i < len(gcp.Resources); i++ {
-		fmt.Println("User Type: " + gcp.Resources[i].Type)
-		fmt.Println("User Age: " + gcp.Resources[i].Name)
+		var instanceName, networkIp, natIp string
+		for j := 0; j < len(gcp.Resources[i].Instances); j++ {
+			instanceName = gcp.Resources[i].Instances[j].Attributes.Name
+			fmt.Println("name: ", instanceName)
+			for l := 0; l < len(gcp.Resources[i].Instances[j].Attributes.NetworkInterface); l++ {
+				networkIp = gcp.Resources[i].Instances[j].Attributes.NetworkInterface[l].NetworkIp
+				fmt.Println("network_ip: ", networkIp)
+				for t := 0; t < len(gcp.Resources[i].Instances[j].Attributes.NetworkInterface[l].AccessConfig); t++ {
+					natIp = gcp.Resources[i].Instances[j].Attributes.NetworkInterface[l].AccessConfig[t].NatIp
+					fmt.Println("nat_ip: ", natIp)
+				}
+			}
+		}
+		q1.addInstance(instanceName, networkIp, natIp)
 	}
+	q1.printInstance()
+
 }
