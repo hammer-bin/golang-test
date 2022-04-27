@@ -63,8 +63,6 @@ func main() {
 
 	list.PrintNodes()
 
-	list.PrintNodes()
-
 	list.RemoveNode(list.root.next)
 
 	list.PrintNodes()
@@ -78,17 +76,4 @@ func main() {
 	list.PrintNodes()
 	fmt.Printf("tail:%d\n", list.tail.val)
 
-}
-
-func AddNode(tail *Node, val int) *Node {
-	/*var tail *Node
-	tail = root
-	for tail.next != nil {
-		tail = tail.next
-	}
-	*/
-	node := &Node{val: val}
-	tail.next = node
-
-	return node
 }
