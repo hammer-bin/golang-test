@@ -42,8 +42,8 @@ func (l *LinkedList) RemoveNode(node *Node) {
 		l.tail = prev
 	} else {
 		node.prev = nil
-		prev.next = prev.next.next
-		prev.next.prev = prev
+		prev.next = prev.next.next //삭제 다음노드로 연결
+		prev.next.prev = prev      // 삭제 다음노드의 이전노드를 삭제 이전 노드로 연결
 	}
 	node.next = nil
 }
@@ -83,6 +83,9 @@ func main() {
 	list.PrintNodes()
 	fmt.Printf("tail:%d\n", list.tail.val)
 	list.PrintReverse()
-	list.PrintReverse()
+
+	a := []int{1, 2, 3, 4, 5}
+	a = append(a[0:2], a[3:]...)
+	fmt.Println(a)
 
 }

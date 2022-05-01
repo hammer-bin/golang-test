@@ -63,7 +63,7 @@ func (l *LinkedList) PopFront() {
 func (l *LinkedList) RemoveNode(node *Node) {
 	if node == l.Root {
 		l.Root = l.Root.Next
-		if l.Root != nil {
+		if l.Root != nil { // nil 처리
 			l.Root.Prev = nil
 		}
 		node.Next = nil

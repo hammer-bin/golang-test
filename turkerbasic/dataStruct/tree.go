@@ -29,6 +29,7 @@ func (t *Tree) DFS1() {
 	DFS1(t.Root)
 }
 
+//재귀호출을 이용한 DFS
 func DFS1(node *TreeNode) {
 	fmt.Printf("%d->", node.Val)
 
@@ -37,6 +38,7 @@ func DFS1(node *TreeNode) {
 	}
 }
 
+// stack을 이용한 DFS
 func (t *Tree) DFS2() {
 	s := []*TreeNode{}
 	s = append(s, t.Root)
