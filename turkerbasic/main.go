@@ -69,7 +69,7 @@ func reverse(s []int) {
 	fmt.Println(s)
 }
 
-func main() {
+func Amain() {
 	tree := dataStruct.Tree{}
 
 	val := 1
