@@ -147,7 +147,7 @@ func Heapmain() {
 	fmt.Println(h.Pop())
 }
 
-func main() {
+func Gmain() {
 	h := &dataStruct.Heap{}
 
 	//[-1,3,-1,5,4] 2번째 큰값
@@ -178,5 +178,10 @@ func main() {
 			h.Pop()
 		}
 	}
-	fmt.Println(h.Pop())
+
+}
+
+func main() {
+	fmt.Println("abcde = ", dataStruct.Hash("abcde"))
+	fmt.Println("abcde = ", dataStruct.Hash("abcde"))
 }
