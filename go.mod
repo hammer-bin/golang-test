@@ -15,7 +15,7 @@ require (
 	github.com/gorilla/pat v1.0.1
 	github.com/gorilla/websocket v1.5.0
 	github.com/hashicorp/vault/api v1.5.0
-	github.com/slack-go/slack v0.10.2
+	github.com/slack-go/slack v0.10.3
 	github.com/smartystreets/goconvey v1.7.2 // indirect
 	github.com/stretchr/testify v1.7.1
 	github.com/tuckersGo/goWeb v0.0.0-20200531032145-28d77cfd0a29
