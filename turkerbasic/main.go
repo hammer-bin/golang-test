@@ -184,4 +184,14 @@ func Gmain() {
 func main() {
 	fmt.Println("abcde = ", dataStruct.Hash("abcde"))
 	fmt.Println("abcde = ", dataStruct.Hash("abcde"))
+
+	m := dataStruct.CreateMap()
+	m.Add("AAA", "0107777777")
+	m.Add("BBB", "0108888888")
+	m.Add("sdlfkj", "0101112323")
+	m.Add("efwww", "0104293922")
+
+	fmt.Println("AAA = ", m.Get("AAA"))
+	fmt.Println("BBB = ", m.Get("BBB"))
+	fmt.Println("sdefeee = ", m.Get("eiwowow"))
 }
