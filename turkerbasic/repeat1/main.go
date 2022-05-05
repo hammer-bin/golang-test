@@ -1,98 +1,90 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"turkerbasic/repeat1/dataStruct1"
+)
 
-type Node struct {
-	next *Node
-	val  int
-}
+func mainLink() {
+	list := &dataStruct1.LinkedList{}
+	list.AddNode(0)
 
-type LinkedList struct {
-	root *Node
-	tail *Node
-}
-
-func (l *LinkedList) AddNode(val int) {
-	if l.root == nil {
-		l.root = &Node{val: val}
-		l.tail = l.root
-		return
+	for i := 1; i < 10; i++ {
+		list.AddNode(i)
 	}
-	l.tail.next = &Node{val: val}
-	l.tail = l.tail.next
-}
 
-func (l *LinkedList) RemoveNode(val int) {
+	list.PrintNode()
 
-}
+	list.RemoveNode(list.Root.Next)
 
-func (l *LinkedList) PrintNode() {
+	list.PrintNode()
+
+	list.RemoveNode(list.Root)
+
+	list.PrintNode()
+
+	list.RemoveNode(list.Tail)
+
+	list.PrintNode()
+
+	fmt.Printf("tail:%d\n", list.Tail.Val)
+
+	list.PrintReverse()
 
 }
 
 func main() {
-	var root *Node
-	var tail *Node
-	root = &Node{val: 0}
-	tail = root
+	var stack []int
 
-	for i := 1; i < 10; i++ {
-		tail = AddNode(tail, i)
+	for i := 1; i <= 5; i++ {
+		stack = append(stack, i)
 	}
 
-	PrintNodes(root)
+	fmt.Println(stack)
 
-	root, tail = RemoveNode(root.next, root, tail)
-
-	PrintNodes(root)
-
-	root, tail = RemoveNode(root, root, tail)
-
-	PrintNodes(root)
-
-	root, tail = RemoveNode(tail, root, tail)
-
-	PrintNodes(root)
-	fmt.Printf("tail:%d\n", tail.val)
-
-}
-
-func AddNode(tail *Node, val int) *Node {
-
-	node := &Node{val: val}
-	tail.next = node
-
-	return node
-}
-
-func RemoveNode(node *Node, root *Node, tail *Node) (*Node, *Node) {
-	if node == root {
-		root = root.next
-		if root == nil {
-			tail = nil
-		}
-		return root, tail
-	}
-	prev := root
-	for prev.next != node {
-		prev = prev.next
+	for len(stack) > 0 {
+		var last int
+		last, stack = stack[len(stack)-1], stack[:len(stack)-1]
+		fmt.Println(last)
 	}
 
-	if node == tail {
-		prev.next = nil
-		tail = prev
-	} else {
-		prev.next = prev.next.next
+	var queue []int
+
+	for i := 1; i <= 5; i++ {
+		queue = append(queue, i)
 	}
 
-	return root, tail
-}
+	fmt.Println(queue)
 
-func PrintNodes(root *Node) {
-	node := root
-	for node.next != nil {
-		fmt.Printf("%d --> ", node.val)
-		node = node.next
+	for len(queue) > 0 {
+		var front int
+		front, queue = queue[0], queue[1:]
+		fmt.Println(front)
 	}
-	fmt.Printf("%d --> \n", node.val)
+
+	stack2 := dataStruct1.NewStack()
+
+	for i := 1; i <= 5; i++ {
+		stack2.Push(i)
+	}
+
+	fmt.Println("NewStack")
+
+	for !stack2.Empty() {
+		val := stack2.Pop()
+		fmt.Printf("%d ->", val)
+	}
+
+	fmt.Println("\nNewQueue")
+	queue2 := dataStruct1.NewQueue()
+
+	for i := 1; i <= 5; i++ {
+		queue2.Push(i)
+	}
+
+	for !queue2.Empty() {
+		val := queue2.Pop()
+		fmt.Printf("%d ->", val)
+	}
+
 }
