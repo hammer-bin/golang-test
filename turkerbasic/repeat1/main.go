@@ -7,6 +7,29 @@ type Node struct {
 	val  int
 }
 
+type LinkedList struct {
+	root *Node
+	tail *Node
+}
+
+func (l *LinkedList) AddNode(val int) {
+	if l.root == nil {
+		l.root = &Node{val: val}
+		l.tail = l.root
+		return
+	}
+	l.tail.next = &Node{val: val}
+	l.tail = l.tail.next
+}
+
+func (l *LinkedList) RemoveNode(val int) {
+
+}
+
+func (l *LinkedList) PrintNode() {
+
+}
+
 func main() {
 	var root *Node
 	var tail *Node
