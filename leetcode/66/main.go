@@ -8,6 +8,19 @@ func main() {
 	s := []int{1, 2, 3}
 
 	plusTwo(s)
+
+	input := []int{5, 6, 7}
+	var a = make([]int, 0)
+	for i := 0; i < len(input); i++ {
+		a = append([]int{input[i]}, a...)
+	}
+	fmt.Println("slice a = ", a)
+
+	var b = make([]int, 0)
+	for i := 0; i < len(input); i++ {
+		b = append(b, input[i])
+	}
+	fmt.Println("slice b = ", b)
 }
 
 func plusOne(digits []int) []int {
