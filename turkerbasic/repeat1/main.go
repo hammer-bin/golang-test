@@ -139,9 +139,9 @@ func main() {
 		fmt.Println("not found 11 cnt: ", cnt)
 	}*/
 
-	h := dataStruct1.Heap{}
+	//h := dataStruct1.Heap{}
 
-	h.Push(2)
+	/*h.Push(2)
 	h.Push(6)
 	h.Push(9)
 	h.Push(6)
@@ -152,5 +152,48 @@ func main() {
 	fmt.Println(h.Pop())
 	fmt.Println(h.Pop())
 	fmt.Println(h.Pop())
+	fmt.Println(h.Pop())*/
+
+	/*//[-1,3,-1,5,4], 2번째
+	nums := []int{-1, 3, -1, 5, 4}
+	for i := 0; i < len(nums); i++ {
+		h.Push(nums[i])
+		if h.Count() > 2 {
+			h.Pop()
+		}
+	}
 	fmt.Println(h.Pop())
+
+	nums = []int{2, 4, -2, -3, 8}
+	for i := 0; i < len(nums); i++ {
+		h.Push(nums[i])
+		if h.Count() > 1 {
+			h.Pop()
+		}
+	}
+	fmt.Println(h.Pop())
+
+	nums = []int{-5, -3, 1}
+	for i := 0; i < len(nums); i++ {
+		h.Push(nums[i])
+		if h.Count() > 3 {
+			h.Pop()
+		}
+	}
+	fmt.Println(h.Pop())*/
+
+	fmt.Println("abcde = ", dataStruct1.Hash("abcde"))
+	fmt.Println("abcde = ", dataStruct1.Hash("abcde"))
+	fmt.Println("abcde = ", dataStruct1.Hash("abcdf"))
+	fmt.Println("abcde = ", dataStruct1.Hash("6bcdf"))
+
+	m := dataStruct1.CreateMap()
+	m.Add("AAA", "0107777777")
+	m.Add("BBB", "0107555577")
+	m.Add("CCC", "0102424577")
+	m.Add("CDG", "0702423982")
+
+	fmt.Println("AAA = ", m.Get("AAA"))
+	fmt.Println("CCC = ", m.Get("CCC"))
+	fmt.Println("DDD = ", m.Get("DDD"))
 }

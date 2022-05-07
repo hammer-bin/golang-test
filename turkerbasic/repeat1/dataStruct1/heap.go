@@ -15,7 +15,7 @@ func (h *Heap) Push(v int) {
 		if parentIdx < 0 {
 			break
 		}
-		if h.list[idx] > h.list[parentIdx] {
+		if h.list[idx] < h.list[parentIdx] { //min heap
 			h.list[idx], h.list[parentIdx] = h.list[parentIdx], h.list[idx]
 			idx = parentIdx
 		} else {
@@ -29,6 +29,10 @@ func (h *Heap) Print() {
 	fmt.Println(h.list)
 }
 
+func (h *Heap) Count() int {
+	return len(h.list)
+}
+
 func (h *Heap) Pop() int {
 	if len(h.list) == 0 {
 		return 0
@@ -37,6 +41,10 @@ func (h *Heap) Pop() int {
 	top := h.list[0]
 	last := h.list[len(h.list)-1]
 	h.list = h.list[:len(h.list)-1]
+
+	if len(h.list) == 0 {
+		return top
+	}
 
 	h.list[0] = last
 	idx := 0
@@ -47,14 +55,14 @@ func (h *Heap) Pop() int {
 			break
 		}
 
-		if h.list[leftIdx] > h.list[idx] {
+		if h.list[leftIdx] < h.list[idx] { //min heap
 			swapIdx = leftIdx
 		}
 
 		rightIdx := idx*2 + 2
 		if rightIdx < len(h.list) { //오른쪽 자식노드가 있는경우에만
-			if h.list[rightIdx] > h.list[idx] {
-				if swapIdx > 0 && h.list[swapIdx] < h.list[rightIdx] {
+			if h.list[rightIdx] < h.list[idx] { //min heap
+				if swapIdx > 0 && h.list[swapIdx] > h.list[rightIdx] { //min heap
 					swapIdx = rightIdx
 				}
 			}
