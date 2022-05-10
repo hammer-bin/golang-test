@@ -16,6 +16,7 @@ func main() {
 	h.Push(8)
 	h.Push(9)
 	h.Push(6)
+	h.Push(1)
 
 	h.Print()
 
