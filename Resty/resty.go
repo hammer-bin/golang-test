@@ -13,14 +13,14 @@ type ProductSearchResponse struct {
 }
 
 type Products struct {
-	Arg     int     `xml:"TotalCount"`
-	Product Product `xml:"Product"`
+	Arg     int       `xml:"TotalCount"`
+	Product []Product `xml:"Product"`
 }
 
 type Product struct {
 	ProductCode   string `xml:"ProductCode"`
 	ProductName   string `xml:"ProductName"`
-	ProductPrice  string `xml:"ProductPrice"`
+	ProductPrice  int64  `xml:"ProductPrice"`
 	ProductImage  string `xml:"ProductImage"`
 	Text1         string `xml:"Text1"`
 	Text2         string `xml:"Text2"`
@@ -33,25 +33,27 @@ type Product struct {
 
 func getPost(client *resty.Client) {
 
-	var aaa ProductSearchResponse
+	var rst ProductSearchResponse
 
 	_, err := client.R().SetQueryParams(map[string]string{
 		"key":     "23a6d341bc2dfe5a99247681ebdac6f1",
 		"apiCode": "ProductSearch",
-		"keyword": "놈모 크로마 게이밍",
+		"keyword": "keychron Q3 적축",
 	}).SetHeader("Accept", "applicaiton/xml").SetAuthToken("23a6d341bc2dfe5a99247681ebdac6f1").
-		SetResult(&aaa).
+		SetResult(&rst).
 		Get("http://openapi.11st.co.kr/openapi/OpenApiService.tmall")
 
 	if err != nil {
 		fmt.Println(err)
 	}
-	//fmt.Println(resp)
 
-	fmt.Println(aaa.Req.Arg)
-	fmt.Println(aaa.Req.Product.ProductCode)
-	fmt.Println(aaa.Req.Product.ProductName)
-	fmt.Println(aaa.Req.Product.SellerNick)
+	fmt.Println(rst.Req.Arg)
+
+	fmt.Printf("Item Count: %d", rst.Req.Arg)
+
+	for _, product := range rst.Req.Product {
+		fmt.Printf("ProductName: |%100s|%7d|\n", product.ProductName, product.ProductPrice)
+	}
 
 }
 
@@ -74,7 +76,5 @@ func main() {
 	}
 
 	getPost(client)
-
-	//client := resty.New()
 
 }
