@@ -9,6 +9,7 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/golang/glog v1.0.0 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.8.0
@@ -18,8 +19,11 @@ require (
 	github.com/slack-go/slack v0.10.3
 	github.com/smartystreets/goconvey v1.7.2 // indirect
 	github.com/stretchr/testify v1.7.1
+	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/tuckersGo/goWeb v0.0.0-20200531032145-28d77cfd0a29
 	github.com/unrolled/render v1.4.1
 	github.com/urfave/negroni v1.0.0 // indirect
 	golang.org/x/net v0.0.0-20211029224645-99673261e6eb // indirect
+	gorm.io/driver/mysql v1.3.6 // indirect
+	gorm.io/gorm v1.23.8 // indirect
 )

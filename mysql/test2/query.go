@@ -7,6 +7,12 @@ import (
 	"log"
 )
 
+type cp struct {
+	clusterId    string
+	name         string
+	providerType string
+}
+
 func main() {
 	db, err := sql.Open("mysql", "terraman:Paasta!2022@(15.164.195.107:31306)/cpdev?parseTime=true")
 	if err != nil {
@@ -14,28 +20,31 @@ func main() {
 	}
 	defer db.Close()
 
-	var name string
+	//var name string
 
-	err = db.QueryRow("SELECT name FROM test.user WHERE no = 1").Scan(&name)
+	//err = db.QueryRow("SELECT name FROM test.user WHERE no = 1").Scan(&name)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//fmt.Println(name)
+
+	rows, err := db.Query("SELECT a.cluster_id, a.name, a.provider_type FROM cp_clusters a, cp_metric_cluster_status b\n WHERE a.cluster_id = b.cluster_id\n   AND a.status = ?", "A")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(name)
 
-	rows, err := db.Query("SELECT no, name, age FROM test.user WHERE no >= ?", 1)
-	if err != nil {
-		log.Fatal(err)
-	}
+	//var clusterId string
+	//var name string
+	//var providerType string
 
-	var no int
-	var name2 string
-	var age int
+	var cpa cp
+
 	for rows.Next() {
-		err := rows.Scan(&no, &name2, &age)
+		err := rows.Scan(&cpa)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(no, name2, age)
+		fmt.Println(cpa.clusterId, cpa.name, cpa.clusterId)
 	}
 
 	result, err := db.Exec("INSERT INTO test.user (name, age) VALUES (?, ?)", "jimmy2", 32)
@@ -53,7 +62,7 @@ func main() {
 	defer stmt.Close()
 	_, _ = stmt.Exec("Tom", "34", "4")
 
-	_ = db.QueryRow("SELECT no, name, age FROM test.user WHERE no=?", 4).Scan(&no, &name2, &age)
-	fmt.Println(no, name2, age)
+	//_ = db.QueryRow("SELECT no, name, age FROM test.user WHERE no=?", 4).Scan(&no, &name2, &age)
+	//fmt.Println(no, name2, age)
 
 }
