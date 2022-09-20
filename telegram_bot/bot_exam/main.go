@@ -9,8 +9,8 @@ import (
 )
 
 const ( // 수정필수
-	tgmToken = "5657957322:AAHX2aL9OwxaLfpuVSeI56Glt40zX2T-lyo" // 텔레그램 토큰
-	logPath  = "./"                                             // 로그가 기록될 경로 // 로그파일명
+	tgmToken = "xxxxxxxxxxxxxI56Glt40zX2T-lyo" // 텔레그램 토큰
+	logPath  = "./"                            // 로그가 기록될 경로 // 로그파일명
 )
 
 const logFileName = "telegram_sendlog.log"
